@@ -563,7 +563,7 @@ void perfect_number(void)
 int main(void) {
     void (*reversetheptr)(void);
     reversetheptr = reversetheint;
-//    function_call();
+    function_call();
 //    sorting_function();
 //    linkedlist_function();//linked list function
 //    stack_function();
