@@ -145,9 +145,9 @@ void quick_sort(void)//quick sort
 /*-------------------------------------------------------------------*/
 void sorting_function(void)
 {
-//    bubble_sort();
-//    insertion_sort();
-//    selection_sort();
+    bubble_sort();
+    insertion_sort();
+    selection_sort();
     quick_sort();
     
 }
