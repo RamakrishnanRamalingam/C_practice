@@ -95,7 +95,6 @@ void memset_own(void)//Write your own memset() function in C
     {
         printf("%d\n",arr[i]);
     }
-    
 }
 /*-------------------------------------------------------------------*/
 void two_smallno(void)//C program to find two smallest elements in a one dimensional array
@@ -681,7 +680,7 @@ void free_memory(void)
     used =0;
 }
 
-void create_own_malloc()//create my own malloc function? Please give an example code.
+void create_own_malloc(void)//create my own malloc function? Please give an example code.
 {
     int *ptr = (int *)create_melloc(sizeof(int));
     *ptr = 255;
@@ -712,7 +711,7 @@ void synchronize_bitposition(void)//Synchronize one bit position with another
     int source = 0x55,target = 0xAA;
     int temp;
 //    Copy bit 2 to bit 5:
-    temp = source>>2&1;
+    temp = source>>2 & 1;
     target = target & ~(1<<5);
     target = target | (temp << 5);
     printf("sync bit - %d\n",target);
@@ -789,7 +788,7 @@ void dynamic_structure(void)//student details using structure and Dynamic Memory
     printf("student - 2,name = %s\nage = %d\nstandatd= %d",student2->name,student2->age,student2->standard);
 }
 /*-------------------------------------------------------------------*/
-void union_example()//C program to declare, initialize an union, example of union.
+void union_example(void)//C program to declare, initialize an union, example of union.
 {
     union byte{
         uint16_t data;
@@ -833,7 +832,7 @@ void replace_zeroone(void)//Write a Program to Replace all 0’s with 1’s in a
     printf("%d",n);
 }
 /*-------------------------------------------------------------------*/
-void add_novariable()//without third variable
+void add_novariable(void)//without third variable
 {
     int a=1,b=2;
     printf("A= %d\nB= %d\n",a,b);

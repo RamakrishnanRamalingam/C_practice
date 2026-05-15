@@ -114,7 +114,7 @@ void compoundinterst(void)
     amount=2300;
     rate=7;
     time=4;
-    interst= amount*(powf((1+rate/100),time));
+    interst= amount*(powf((1+rate/100),time));//interest = ((rate/100)*amount)time;
     principleampund = interst - amount;
     printf("principle amount is = %f",principleampund);
 }
@@ -540,6 +540,124 @@ void perfect_number(void)
     }
 }
 /*-------------------------------------------------------------------*/
+void non_repet_element(void) // not repiting element in the array
+{
+    int arr[] = {4,1,2,3,1,2,3};
+    int temp=0;
+    for(int i=0;i<=7;i++)
+    {
+        temp = arr[i];
+        for(int j=0;j<7;j++)
+        {
+            if(arr[i]==arr[j] && i !=j )
+            {
+                temp=0;
+                break;
+            }
+        }
+        if(temp != 0)
+            printf("%d",temp);
+    }
+}
+/*-------------------------------------------------------------------*/
+//Reverse the bits of an integer
+void reverse_bits(void)
+{
+    uint8_t data=5;
+    uint8_t data1=data;
+    uint8_t rev=0;
+    uint8_t temp =0x0f;
+    for (int i=0;i<8;i++)
+    {
+        rev = (rev<<1) | (data & 1);
+        data =data>>1;
+    }
+    printf("data -%drev -%d\n",data1,rev);
+    
+}
+/*-------------------------------------------------------------------*/
+//Given two integers, produce a third integer such that each nibble is the maximum of the corresponding nibbles from the two integers.
+void twoint_getthird(void)
+{
+    uint16_t a=0x1234;
+    uint16_t b=0x4021;
+    int result=0;
+    for(int i=0;i<5;i++)
+    {
+        uint16_t a_nibble = a>>(i*4) & 0x000F;
+        uint16_t b_nibble = b>>(i*4) & 0x000F;
+        int sum = (a_nibble > b_nibble)?a_nibble:b_nibble;
+        result = result | sum<<(i*4);
+    }
+    printf("third variable-%X",result);
+    
+}
+
+/*-------------------------------------------------------------------*/
+//Find the parity of a number and ways to optimize it
+//Simplemethod
+void parity_simple(void)
+{
+    uint8_t data =55;
+    int count =0;
+    int parity =0;
+    while(data)
+    {
+        parity = parity+(data & 1);
+        data=data>>1;
+        count++;
+    }
+    parity = parity%2; //1 for odd 0 for even
+    printf("parity-%d\n",parity);
+
+}
+/*-------------------------------------------------------------------*/
+//Implement a skip in array search
+void skip_seaarch(void)
+{
+    int arr[]={1,2,4,5,6,7,8,9};
+    int low =0;
+    int high = 8;
+    int search =4;
+ while(low<high)
+    {
+        int mid =(low+high)/2;
+        if(arr[mid]==search)
+        {
+            printf("search data %d",arr[mid]);
+            break;
+        }
+        else if (arr[mid] < search){
+            low = mid+1;
+            
+        }
+        else{
+            high = mid-1;
+        }
+    }
+}
+/*-------------------------------------------------------------------*/
+//Power of value
+void power_of_value(void)
+{
+    int data =16;
+    int power = (data != 0 && (data & (data-1)));
+    if(power ==0)
+    {
+        printf("Given value is - %d is power of two\n",data);
+    }
+    else{
+        printf("Given value is - %d not power of two\n",data);
+    }
+    
+}
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+
+
 
 
 void interview_function(void)
@@ -572,5 +690,11 @@ void interview_function(void)
 //    decimal_char();
 //    bin_dec();
 //    perfect_number();
+//    non_repet_element();
+//    reverse_bits();
+//    twoint_getthird();
+//    parity_simple();
+//    skip_seaarch();
+    power_of_value();
 }
 
