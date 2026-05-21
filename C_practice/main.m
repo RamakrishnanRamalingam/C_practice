@@ -16,6 +16,7 @@
 #include "tree.h"
 #include "search_sort.h"
 #include "Interview.h"
+#include "hackerrank.h"
 
 int main(void) {
 
@@ -25,7 +26,8 @@ int main(void) {
 //    stack_function();
 //    queue_function();
 //    searchsort_function();
-    interview_function();
+//    interview_function();
+    hackerrank();
 
 
     
