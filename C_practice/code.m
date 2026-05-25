@@ -6,7 +6,88 @@
 //
 //  Created by Rama Thean on 2026-02-13.
 //
-void memmory_copy()//memcpy() function in C with Example
+/*-------------------------------------------------------------------*/
+//Dynamic memory allocation functions with a 2D array in C
+
+void two_dimension_dynamic(void)
+{
+    int rows = 2, cols = 3;
+    int **arr;
+    // malloc() for rows
+    arr = (int **)malloc(rows * sizeof(int *));
+    // malloc() for columns
+    for (int i = 0; i < rows; i++)
+    {
+        arr[i] = (int *)malloc(cols * sizeof(int));
+    }
+    printf("Using malloc:\n");
+    // Assign values
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            arr[i][j] = i + j;
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+    // realloc() - increase columns
+    cols = 5;
+    for (int i = 0; i < rows; i++)
+    {
+        arr[i] = (int *)realloc(arr[i], cols * sizeof(int));
+    }
+    printf("\nAfter realloc:\n");
+    // Add new values
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 3; j < cols; j++)
+        {
+            arr[i][j] = i + j;
+        }
+    }
+
+    // Print updated array
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+    // free old memory
+    for (int i = 0; i < rows; i++)
+    {
+        free(arr[i]);
+    }
+    free(arr);
+    // calloc() example
+    arr = (int **)calloc(rows, sizeof(int *));
+    for (int i = 0; i < rows; i++)
+    {
+        arr[i] = (int *)calloc(cols, sizeof(int));
+    }
+    printf("\nUsing calloc:\n");
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+    // free memory
+    for (int i = 0; i < rows; i++)
+    {
+        free(arr[i]);
+    }
+    free(arr);
+
+//    return 0;
+}
+/*-------------------------------------------------------------------*/
+void memmory_copy(void)//memcpy() function in C with Example
 {
     char source[20]="Ramakrishnan";
     char designation[20]="love today";
@@ -152,7 +233,7 @@ void Cyclically_Permute(void)//C Program to Cyclically Permute the Elements of a
 }
 
 /*-------------------------------------------------------------------*/
-void sorting(int *arr,int size) // Bubble sort
+void sorting_bubble(int *arr,int size) // Bubble sort
 {
     int temp;
     for(int i=0;i<size;i++)
@@ -168,6 +249,7 @@ void sorting(int *arr,int size) // Bubble sort
         }
     }
 }
+/*-------------------------------------------------------------------*/
 int search_fun(int *arr,int search,int size) //Binary Search
 {
     int low=0,high=size-1;
@@ -200,7 +282,7 @@ void sort_binary(void)//C Program to Search Sorted Array using Binary Search
     {
         printf(" %d",arr[i]);
     }
-  sorting(arr,sizeof(arr)/sizeof(arr[0]));
+    sorting_bubble(arr,sizeof(arr)/sizeof(arr[0]));
     printf("\nafter sort - ");
     for(int i=0;i<sizeof(arr)/sizeof(arr[0]);i++)
     {
@@ -624,6 +706,7 @@ void linked_altenate(void)//Print the Alternate Nodes in a Linked List without u
     
 }
 /*-------------------------------------------------------------------*/
+//C program to compare strings using strcmp() function
 void own_check(char *source, char *target)
 {
     int flag=0;
@@ -1060,7 +1143,7 @@ void function_call(void)
 //    toupper_function();
 //    array_inset_pos();
 //    inset_begining();
-    stack_using_array();
+//    stack_using_array();
     
     
     

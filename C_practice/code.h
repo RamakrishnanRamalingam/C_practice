@@ -33,16 +33,16 @@ void linked_lenth1(void);//Find the length of a linked list without using recurs
 void linked_alternate_recursion(void);//Print the Alternate Nodes in a Linked List using Recursion
 void linked_altenate(void);//Print the Alternate Nodes in a Linked List without using Recursion
 void string_compare(void);//C program to compare strings using strcmp() function
-void create_own_malloc();//create my own malloc function? Please give an example code.
+void create_own_malloc(void);//create my own malloc function? Please give an example code.
 void modify_bit(void);//Modify specific bits in a 32-bit number based on logical conditions
 void synchronize_bitposition(void);//Synchronize one bit position with another
 void bit_always_different(void);//Ensure two specific bit positions are always different
 void dynamic_allocation(void);//C Dynamic Memory Allocation Examples
 void dynamic_array(void);//array elements using Dynamic Memory Allocation.
 void dynamic_structure(void);//student details using structure and Dynamic Memory Allocation.
-void union_example();//C program to declare, initialize an union, example of union.
+void union_example(void);//C program to declare, initialize an union, example of union.
 void replace_zeroone(void);//Write a Program to Replace all 0’s with 1’s in a Number.
-void add_novariable();//without third variable 
+void add_novariable(void);//without third variable
 void odd_even(void);//how can you determine if a number is odd or even?
 void toupper_function(void);//What is the use of toupper() function in C?
 void array_inset_pos(void);// array inset 

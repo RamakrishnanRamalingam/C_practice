@@ -254,6 +254,7 @@ void array_queue(void)
     peek_queue();
     
 }
+/*-------------------------------------------------------------------*/
 
 struct qnode
 {
@@ -328,7 +329,7 @@ void display_queue_list(void)
      peek_list_peek();
      
  }
-
+/*-------------------------------------------------------------------*/
 #define CIR 5
 int cir_data[CIR];
 int front_c = -1,rear_c = -1;
@@ -397,7 +398,7 @@ void cir_array_queue(void)
     enqueue_cir(2);
     display_cir();
 }
-
+/*-------------------------------------------------------------------*/
 #define DEQUE 5
 int dequeue_data[DEQUE];
 int front_deque=-1,rear_deque=-1;

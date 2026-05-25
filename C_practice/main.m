@@ -20,14 +20,14 @@
 
 int main(void) {
 
-//    function_call();
+    function_call();
 //    sorting_function();
 //    linkedlist_function();//linked list function
 //    stack_function();
 //    queue_function();
 //    searchsort_function();
 //    interview_function();
-    hackerrank();
+//    hackerrank();
 
 
     
