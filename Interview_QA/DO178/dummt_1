@@ -1,0 +1,1233 @@
+Page 1 of 24
+.
+ENGINEERING OPERATING PROCEDURE
+REVISED: 2023-12-11
+No.: 183
+Responsible Organization:
+Externals, Controls & Nacelles
+REQUIREMENTS FOR DEVELOPMENT OF ENGINE CONTROL SYSTEM SOFTWARE
+P&WC Controlled as per MMP 60 and MMP 85
+WARNING - PROPRIETARY RIGHTS NOTICE: This document is the property of Pratt & Whitney Canada Corp. ("P&WC"). You may not possess, use, copy
+or disclose this document or any information in it, for any purpose, including without limitation to design, manufacture, or repair parts, or obtain TCCA, FAA or
+other government approval to do so, without P&WC's express written permission. Neither receipt nor possession of this document alone, from any source,
+constitutes such permission. Possession, use, copying or disclosure by anyone without P&WC's express written permission is not authorized and may result
+in criminal or civil liability.
+NOTICE - DISCLOSURE OF INFORMATION: This document contains trade secrets, financial, commercial, scientific, technical or other confidential
+information, the further disclosure of which will result in material financial harm and/or prejudice to the competitive position of Pratt & Whitney Canada Corp
+(P&WC). P&WC considers any and all information contained herein or disclosed pursuant hereto, taken separately or as a whole, as a record the disclosure
+of which should be refused pursuant to section 20(1) of the Access to Information Act. If the head of a Government institution or department intends to
+disclose any of this information, prior written consent must be obtained from Vice President - Counsel and Corporate Secretary, Pratt & Whitney Canada
+Corp., 1000 Marie-Victorin (01BE5), Longueuil, Quebec J4G 1A1.
+Custodian:
+Jeffrey Weinstein
+Agreed For TCCA:
+Nature of Change for this Issue
+Joanne Diamant
+(93-Q-01)
+Agreed for EASA
+DOA:
+This revision includes reference to product security aspects when applicable to an engine program.
+1. 
+Scope
+N/A
+(EASA.21J.570)
+This procedure applies to the Application Software-Control Laws (AS-CL) Computer Software Configuration Item
+(CSCI) (as defined in section 6 of this documents), embedded in Engine Control System developed by Pratt and
+Whitney Canada (P&WC) Software Design team and used on the P&WC Electronic Engine Control (EEC).
+The process defined in this document is applicable to software development process activities performed by P&WC
+Software Design team and complements the control systems process activities defined in EOP 84. Refer to
+relevant PSAC for a detailed description of roles and responsibilities of P&WC’s and supplier’s Software Design
+teams.
+NOTE: The Appendices of this document provide supplementary information. They are part of this procedure.
+1.1 
+Purpose
+This procedure serves the following purposes:
+1.
+2.
+To define the Engine Control Systems software development process requirements including software
+processes, procedures, standards, activities and work products that will be applied to the AS-CL CSCI of
+engine control system developed by the P&WC Software Design team in accordance with RTCA/DO-178B/C
+objectives to enable compliance with certification requirements as per AWM 533.28.
+To define the process requirements and transition criteria for the reviews performed on the Software Build
+Request (SBR) based software work products (program specific or library) developed by the P&WC software
+design team in order to detect and eliminate defects at early phases in the engine control systems software
+life cycle processes.
+This procedure is developed based on the guidelines provided in RTCA/DO-178B/C and Engineering Best
+Practices (EOP 116) documents to meet quality requirements outlined in QMSP 7-3. It is enabled by the EOP 84.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 2
+1.2 
+1.3 
+1.4 
+2. 
+2.1 
+Export Control
+When Receiving, Creating, Handling or Transferring data, the export control requirements outlined in Engineering
+Operating Procedure 159 must be adhered to along with its associated applicable documents.
+Identification
+This document is for the CSCI identified as the Engine Control System Application Software.
+Order of Precedence
+In the event of conflict between the requirements of this procedure and the program specific PSAC, the
+requirements specified in the PSAC and the supporting RTCA/DO-178B/C documents take precedence over this
+procedure and the delegate (Software DAA or CVE) is responsible for resolving the conflicts through the program
+specific Discrepancy Report (DR) system as defined in Section 7.1.3.2.1.
+If the PSAC calls for life cycle data/documents different from those named in corresponding paragraph(s) of this
+procedure, all references to the life cycle data/documents in this procedure should be interpreted to mean the ones
+in the PSAC.
+Applicable Documents
+The following publications form a part of this document to the extent specified herein; unless otherwise specified
+the latest issue shall apply.
+Pratt & Whitney Canada Corp. Publications
+DAPM
+EOP 84
+EOP 103
+EOP 107
+EOP 116
+EOP 158
+EOP 159
+ER9432
+MED 248
+MED 256
+MED 258
+MED 259
+MED 266
+MED 267
+MED 293
+MED 299
+MED 314
+MED 317
+MED 330
+MED 353
+MMP 510
+QMSP 7-3
+Design Approval Procedures Manual.
+Requirements for Development of Engine Control Systems.
+Design Process and Design Reviews.
+Use of Engineering Reports and Technical Notes.
+Engineering Best Practices.
+Engine Development/Production Discrepancy System.
+Export Control & Other Restrictions Governing the Export of Controlled Article & Technical
+Data to Foreign Entities.
+PW800 Software Development Plan.
+Preparation And Use of a Core Software Module.
+LLR to Code Traceability.
+Traceability Guide-Line in D0178b Software Development Environment.
+Software Issues Reporting and Change Reports Guidelines.
+Guidelines for Using Simulink Design Review Checklist.
+Guidelines for Writing Software Requirements for PWC (NGPF).
+Procedure for Writing Control Laws.
+Guidelines for Using Ascr Review Checklist.
+Guidelines for Using Scade Design Review Checklist.
+Software Design Delivery Checklist.
+Preparation and Use of the Software Design Document (SDD) in a Model Based
+Environment.
+MATLAB Model Delivery Checklist.
+Airworthiness Support Systems.
+Design and Development.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 3
+QMSP 7-5
+QP 21 - SQAP
+WIM 329
+WIM 449
+WIM 474
+WIM 493
+WIM 750
+WIM 795
+WIM 811
+WIM 856
+2.2 
+Production and Service Provision.
+Software Quality Assurance Plan for Airborne Software (Class 1a).
+Preparation and Use of Control System Change Request (CSCR).
+Preparation and Use of the Software Build Request (SBR).
+Airworthiness Support Systems.
+Preparation and Use of the Software Requirements Document (SRD).
+Software Design Review Process.
+Control System Architecture Design Standard
+Control System Software Discrepancy Report (DR) Classifications.
+Preparation and Use of Control Architecture Documents
+External Reference Documents
+The reference documents identified as "guidance material" provide information used to form this EOP and are not
+to be interpreted as requirements.
+RTCA/DO-178B Software Considerations in Airborne Systems & Equipment Certification.
+RTCA/DO-178C Software Considerations in Airborne Systems & Equipment Certification.
+AWM 533
+Airworthiness Manual Chapter 533 - Aircraft Engines
+2.3 
+Relationship with Other Processes
+This procedure is the subset of Control System Development process that specifies the software development
+process pertaining to the Application Software and is invoked by the EOP 84.
+EOP 84 outlines the process, procedures, and activities used by Control Systems Engineering to ensure that the
+developed control system meets its requirements pertaining to the design, development, certification and post
+certification of engine control systems.
+Following figure shows the relationship between this procedure and EOP 84.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 4
+Figure 1. EOP 183 Relationship with EOP 84 and Supplier's Processes
+NOTE: Supplier's Software Development Process is shown for completeness.
+3. 
+4. 
+Application
+This procedure shall affect the activities of Control Systems Engineering, Software Design, Software Quality,
+Project Engineering, and Product Reliability and Safety.
+Software Design is responsible for ensuring that these procedures are applied, within the scope of their authority.
+The process requirements are applicable to P&WC Software Design team in order to prove compliance to
+RTCA/DO-178B/C objectives as defined in the PSAC.
+This procedure applies to developmental and certification (production) software builds as given in the EOP 84. This
+procedure does not apply to non airborne systems, even if such systems support continued airworthiness. Such
+ground systems are covered by MMP 510 and WIM 474.
+Acronyms
+This section provides a list of acronyms used in this procedure, with their associated meanings.
+Acronyms
+ADC
+a.k.a
+APB
+ARINC
+ARP
+AS
+Meanings
+Analog to Digital Converter
+Also Known As (alias)
+Aircraft Powerplant Business
+Aeronautical Radio, Inc.
+Aerospace Recommended Practice
+Application Software
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+Acronyms
+Meanings
+PAGE 5
+ASCR
+ASI
+AWM
+CAN
+CBIT
+CC1
+CC2
+CM
+CODEGEN
+COTS
+CPU
+CSC
+CSCI
+CSCR
+CSRD
+CSU
+CVE
+DAA
+DAPM
+DCR
+DCU
+DR
+EASA
+EEC
+EEPROM
+EOP
+ES
+FAA
+FADEC
+HBOV
+HW
+HWCI
+ICD
+I/O
+IPT
+IRS
+KCG
+LCF
+LOTC
+MATLAB
+MED
+NGPF
+Application Software Change Request
+Application Software Interface
+Airworthiness Manual
+Controller Area Network
+Continuous Build in Test
+Control Category 1
+Control Category 2
+Configuration Management
+Code Generator
+Commercial Off-the-Shelf
+Central Processing Unit
+Computer Software Component
+Computer Software Configuration Item
+Control System Change Request
+Control System Requirements Document
+Computer Software Unit
+Compliance Verification Engineers
+Design Approval Appointee
+Design Approval Procedures Manual
+Design Change Review
+Data Collection Unit
+Discrepancy Report (a.k.a. Problem Report)
+European Aviation Safety Agency
+Electronic Engine Controller
+Electrically Erasable Programmable Read Only Memory
+Engineering Operating Procedure
+Equipment Specification
+Federal Aviation Administration
+Full Authority Digital Engine Controller
+Handling Bleed-Off Valve
+Hardware
+Hardware Configuration Item
+Interface Control Document
+Input/Output
+Integrated Product Team
+Interface Requirements Specification
+Qualifiable Code Generator
+Low Cycle Fatigue
+Loss of Thrust Control
+Matrix Laboratory
+Manual of External Design
+Next Generation Program Family
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+Acronyms
+Meanings
+PAGE 6
+ORD
+OS
+PBIT
+PR
+PSAC
+PS DAA
+P&WC
+RTCA
+SAS
+SBR
+SCADE
+SCI
+SCM
+SCMP
+SDD
+SDDR
+SDP
+SECI
+SID
+SIMULINK
+SOI
+SQA
+SRD
+SRDR
+SSA
+SVCP
+SVP
+SVR
+SW
+TBD
+TCCA
+TLD
+TQP
+TRR
+VIGV
+WIM
+5. 
+Definitions
+Operability Requirements Document
+Operating System
+Power-up Built in Test
+Problem Report
+Plan for Software Aspects of Certification
+Product Security Design Approval Appointee
+Pratt & Whitney Canada Corporation
+RTCA Inc.
+Software Accomplishment Summary
+Software Build Request
+Safety Critical Application Development Environment
+Software Configuration Index
+Software Configuration Management
+Software Configuration Management Plan
+Software Design Document
+Software Design Document Review
+Software Development Plan
+Software Life Cycle Environment Configuration Index
+Software Interface Document
+Simulation Link
+Stage of Involvement
+Software Quality Assurance
+Software Requirements Document
+Software Requirements Document Review
+System Safety Assessment
+Software Verification Cases and Procedures
+Software Verification Plan
+Software Verification Results
+Software
+To Be Determined
+Transport Canada Civil Aviation
+Time Limited Dispatch
+Tool Qualification Plan
+Test Readiness Review
+Variable Inlet Guide Vane
+Work Instruction Manual
+The term “verification” is used in this procedure to include the combination of test, analysis, review and
+documentation put forward to justify approving control system Application Software for a defined standard of use.
+This nomenclature is used throughout this procedure and will be adopted for all re-issues of the WIMs called out in
+this procedure that occur after the issue of this procedure.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+Table 1: Definitions
+Short Form Used Herein Definition
+Architecture The organizational structure of a system or CSCI, identifying its components, their interfaces, and a concept of execution
+among them.
+Build A portion of a system that satisfies completely an identifiable subset of the control system requirements.
+Computer Software
+Configuration Item (CSCI)
+An aggregation of computer software components (CSCs) that satisfies an end use function and is designated for separate
+configuration item.
+Computer Software
+Component (CSC)
+A distinct part of a computer software configuration item (CSCI). CSCs may be further decomposed into other CSCs and
+Computer Software Units (CSUs).
+Computer Software Unit (CSU) An element specified in the design of a Computer Software Component (CSC) that is separately testable.
+Deliverable software-Class 1A
+(Reference QMSP 7-5)
+Software that is Aircraft Powerplant Business (APB) product or is part of APB product including:
+Class 1A: Software embedded in engine accessories. (must be in compliance with RTCA/DO-178/C)
+Interface In software development, a relationship among two or more entities (such as CSCI-CSCI, CSCI-HW Item, CSCI-user, or
+software unit-software unit) in which the entities share, provide, or exchange data. An interface is not a CSCI, software unit, or
+other system component; it is a relationship among them.
+Transition Criteria Review Review of the criteria to be satisfied/completed to reach the next process steps performed to ensure criteria of the process
+steps are completed.
+Process An organized set of activities performed for a given purpose; for example, the software development process.
+Release It is a Build (particular version of a configuration item) that is made available for a specific purpose (for example, test release).
+Requirement
+1. A characteristic that a system or CSCI must possess in order to be compliant with system/software.
+2. A mandatory statement in this procedure denoted by the word “shall”.
+Software Build Request (SBR) It is a request made by Control Systems engineering to Software Design (including supplier) to develop the software that
+satisfies completely an identifiable set of the control system requirements. Each software build definition is controlled by a
+Software Build Request document defined as per WIM 449.
+Software Classes
+(Reference QMSP 7-5)
+Software classes defined for Deliverable and Non-Deliverable software.
+Software Development Process An organized set of activities performed to translate customer needs into software products.
+Supplier The organization performing the technical effort as defined in the PSAC to develop software products. The supplier may be a
+contractor performing software development activities.
+Work Product Software or associated data created, modified, or incorporated to satisfy the requirements defined in PSAC. Examples include
+plans, requirements, design, code, test data, checklists, and other documentation required for certification.
+6. Engine Control System Software Overview
+An Engine Control System primarily comprises of following components: EEC, Sensors, Embedded Software, Fuel
+Control Unit (FCU), Handling Bleed-Off Valve (HBOV), Variable Inlet Guide Vanes (VIGV), Igniters, Shutdown
+Solenoid(s), Wiring Harness, Data Collection Unit (DCU), and other items. Main functions of the Engine Control
+System include automated start/shutdown sequencing, fuel flow modulation in response to pilot commands,
+automated surge/flameout avoidance, limiting of engine power, speed, torque, and temperature parameters as
+appropriate and the serial data interface to the aircraft displays and avionics system.
+The EEC software comprises of following major software components (Figure 2):
+Figure 2. EEC System Software Layered Architecture
+EOP- 183 PAGE 7
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 8
+1.
+2.
+Operating System Software (OSS): Provides an interface between the EEC hardware and the AS. The OSS
+capabilities include the bootstrap software, scheduler, Built-In-Tests (PBIT, CBIT), System configuration data
+file (system parameters/constant file), device driver software for the hardware resources such as memory
+devices (e.g., Flash, EEPROM), interface devices (e.g. RS-232, ARINC 429, CAN, Discrete I/Os, ADC),
+watchdog timers, etc.
+Application Software (AS): Per Figure 2, the AS includes the control law algorithms which are executed based
+on the inputs acquired by the EEC hardware and processed by the OSS, and the ASI for handling the
+communication between AS Control Laws and OSS. The outputs generated by the AS control law algorithm
+functions are fed to the OSS via the ASI to drive the EEC hardware accordingly. The AS capabilities also
+include fault detection, accommodation and annunciation, communication with the Engine Display System and
+the engine mounted DCU.
+The AS is divided further into two components:
+a.
+Application Software –Control Laws (AS-CL): This component includes a subset but is not limited to
+the following components:– Control Laws (CL): Capabilities include control law algorithms, Inputs reasonability checks, Fault
+accommodation, Fault annunciation, etc.– Parts Library (PL): Contains operators that are used to design AS-CL components.– Power Settings (PS): This component is used in turbo-fan and turbo-prop applications only. It
+adjusts the control system speed references based on the ambient conditions and the amount of
+thrust (turbo-fans) or SHP (turbo-prop) requested by the throttle position.– Time Limited Dispatch (TLD): This component classifies the faults detected by the control system
+software into categories, which relate to the probability of occurrence of a Loss of Thrust Control
+(LOTC) event. This classification allows an engine with a control system with detected faults, to be
+dispatched for some time period, before the fault has to be corrected.– Monitoring & Diagnostics: Monitors and schedules the data to be recorded in the DCU in order to
+provide information on the engine history, engine events and control system faults.– Cruise-Control: The Cruise Speed Control function is designed to control the airspeed of the aircraft
+by varying the control system references. This component is used in turbo-fan and turbo-prop
+applications only.– Low Cycle Fatigue (LCF): The automated LCF counting functions provide an algorithm for
+evaluating life usage of engine components related to engine spool speeds. Maintenance personnel
+use the information stored in the DCU to schedule engine maintenance.– Creep: The Creep function provides a mechanism for evaluating engine component blade creep
+incurred during engine operation as a result of day to day aircraft operations. Maintenance personnel
+use the information stored in the DCU as an aid to schedule engine maintenance.
+NOTE: All the aforementioned AS-CL components, including the libraries/core described in MED 248, can be
+developed as standalone projects following the process described hereafter.
+NOTE: Not all applications use TLD, LCF, Creep, Power Setting, Cruise-Control, or Monitoring and
+Diagnostics.
+b.
+Application Software Interface (ASI): The purpose of the ASI is to provide interface between AS-CL
+and the OSS via common memory allocation such as shared memory, APEX, etc. The ASI capabilities
+also include the maintenance interface which is used to transmit data between the EEC and the Ground
+Support Equipment (GSE), etc.
+The source code of AS-CL and ASI are integrated, compiled and linked together to form an AS executable image.
+Refer to Section 7.1.2.4 for Software Code and Integration (Implementation) activity.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 9
+7. 
+7.1 
+Control System Software Development Process Requirements
+This section provides control system software development process requirements including software processes,
+procedures, standards, activities and products that are applied to the AS CSCI of engine control system.
+Control System Software Development Life Cycle Model
+The P&WC engine control systems software development process employs a “V” model with evolutionary iterative
+(incremental) life cycle in the development of its software as shown in Figure 3. This model consists of a sequential
+progression through a series of development phases, with each phase building on the outputs of the previous
+phase and verified through the corresponding transition criteria review process in accordance with RTCA/
+DO-178B/C and DAPM. Transition criteria during each phase include, Input documents (or data) required to enter
+into life cycle phase (Entry-Criteria), activities performed during the phase, and output documents required exiting
+from the life cycle phase (Exit-Criteria) to enter into subsequent development phase in the life cycle.(e.g.
+transitioning from Software Requirements phase to Software Design phase).
+Figure 3. "V" Model with Evolutionary Iterative Control Systems Software Development Life Cycle
+The Software Development Process can be broken down as follows:
+1. Software Planning Process
+2. Software Design Process
+3. Integral Processes Include
+(details in Section 7.1.1)
+(details in Section 7.1.2)
+(details in Section 7.1.3)
+3.1 Software Verification Process
+3.2 Software Configuration Management Process
+3.3 Software Quality Assurance Process
+The development cycle may be used in an iterative manner. The software development and corresponding integral
+processes are repeated until the Application Software meets both the control system requirements and the
+certification requirements.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 10
+7.1.1 
+7.1.1.1 
+7.1.1.2 
+7.1.1.3 
+7.1.1.4 
+7.1.1.5 
+7.1.1.6 
+7.1.2 
+Control System Software Planning Process Activities
+Software planning process includes the Plan for Software Aspects of Certification (PSAC), the Software
+Development Plan (SDP) including the Software Development Standards, the Software Verification Plan (SVP), the
+Software Configuration Management Plan (SCMP) and the Software Quality Assurance Plan (SQAP). These
+documents are produced as per the roles and responsibilities defined in the PSAC and shall conform to the
+guidelines in RTCA/DO-178B/C and the requirements stated hereafter.
+The PSAC is reviewed by Software DAA or CVE to ensure that it meets the guidance of DO-178B/C. The PSAC
+must be approved by Software DAA or CVE before it can be submitted to certification authorities and prior to any
+formal software design activities being undertaken.
+In the event that product security functionality is to be incorporated in the software, the associated PSAC shall also
+be approved by the Product Security DAA (PS DAA) or the cognizant Software CVE with product security aspects
+knowledge.
+Software Development Standards
+The software development standards include the software requirements standards, software design standards and
+software coding standards. These standards are applicable to AS-CL described in Section 6 for P&WC
+deliverables. The P&WC design team shall be responsible to ensure that these standards are aligned with software
+design tools and processes defined in PSAC and SDP, respectively.
+Software Requirements Standards
+The AS-CL high-level requirements are developed in compliance with Software Requirements Standards. Refer to
+the program specific PSAC for details on software development environment. Software Requirements Standards
+shall conform to the guidelines in RTCA/DO-178B/C section 11.6. WIM 493 (Preparation And Use Of The Software
+Requirements Document (SRD)) and MED 293 or MED 267 (NGPF Programs) provides guidance on writing
+software requirements.
+Software Design Standards
+The AS design (low-level requirements) is performed in compliance with the Software Design Standards. Refer to
+the program specific PSAC for details on software development environment. The Software Design Standards shall
+conform to the guidelines specified in RTCA/DO-178B/C Section 11.7.
+Software Design Standards
+The AS architecture is performed in compliance with the software architecture standards in WIM 795.
+Software Coding Standards
+The AS code is generated using automatic code generator tool and manual code in compliance with the Software
+Coding Standards as defined in the SDP. Refer to the program specific PSAC for software development
+environment. The Software Coding Standards shall conform to the guidelines specified in RTCA/DO-178B/C
+Section 11.8.
+Software Development Tools
+Software development tools for which certification credit is sought for shall be qualified. Refer to program specific
+PSAC for a description of such tools.
+Control System Software Development Process Activities
+The development life cycle phases in the control system software development include the following activities (for
+details on roles and responsibilities regarding these activities refer to PSAC):
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 11
+1.
+2.
+3.
+4.
+Control System Requirements Analysis*
+Software Requirements Analysis
+Software Design
+Software Coding and Integration**
+(details in Section 7.1.2.1)
+(details in Section 7.1.2.2)
+(details in Section 7.1.2.3)
+(details in Section 7.1.2.4)
+NOTE: * and ** denote that the process is shown for completeness but covered by EOP 84 and SDP, respectively.
+Figure 4 illustrates the requirements flow down in the Control System Software development life cycle while
+Figure 5 depicts the development phases covered by this document and the phase transition criteria reviews
+performed to exit / enter each phase. Note the distinction made between development path and the life cycle data
+update path.
+Figure 4. Control System and Software Requirements Flow Down
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 12
+Figure 5. Control System and Software Development Paths
+7.1.2.1 
+Control System Requirements Analysis
+Control System Requirements Analysis is performed by Control Systems Engineering whereby changes to the
+Control System Requirement Document (CSCR) are introduced through a series of CSCRs developed and
+reviewed as per WIM 329. Refer to EOP 84 for details on Control Systems Engineering documentation on Control
+System Requirements Analysis process activities.
+For Control System Requirements involving the use of a Core Library, the usage considerations are defined in
+MED 248 and in the specific Core Library User Guide. The Core Library User Guide will include System
+Requirement Templates and Samples, and System Requirement Test Cases for component integration. The Core
+Library Systems Checklist found in the specific Core Library User Guide should be referenced throughout the
+process, but is only required to be passed or conditionally passed prior to the completion of the Software Design
+phase since the questions involve aspects related to the entire development phase.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 13
+7.1.2.2 
+Software Requirements Analysis
+During this activity, the AS-CL high-level requirements analysis is performed in accordance with the P&WC
+software requirements process which is shown in Figure 6.
+The software verification activities shall be performed in accordance with the SVP to meet RTCA/DO-178B/C
+objectives as defined in the PSAC (Refer to Section 7.1.3.1).
+Figure 6. Software Requirements Analysis Phase
+The Software Requirements Analysis phase involves determining and analyzing all functional, performance and
+safety requirements allocated to the AS-CL CSCI from the Control System Requirements Document (CSRD) and
+CSCRs. Changes to AS-CL high-level requirements, including the traceability to the Control System requirements,
+invoked by CSCRs or DRs as defined in the SBR are evaluated in the Software Requirement Analysis phase and
+are introduced to the baseline Application Software CSCI - Software Requirements Document (AS SRD) through a
+series of ASCRs developed as per WIM 493 and MED 293 or MED 267 (NGPF Programs). This process also
+includes analyzing and documenting all interface changes related to the AS, including if applicable to the ASI,
+through the Interface Requirements Specification (IRS) document which defines the interface requirements
+between AS-CL and other components of the operation of the engine control system (i.e. ASI). The IRS is
+approved once the author, ASI representative, CL representative agree with the interface changes.
+The Application Software requirements shall be analyzed and developed in accordance with the software
+requirements standard as given in Section 7.1.1.2, documented in compliance with Section 11.9 of RTCA/
+DO-178B/C document (refer to Appendix A), and verified in accordance with the RTCA/DO-178B/C based
+checklists for software requirements. The traceability matrix shall be generated by Software Design as per MED
+258 to show the correctness and completeness of bi-directional traceability between SRD and CSRD (i.e., SRD 
+CSRD). Bi-directional traceability includes forward (top-down) traceability and backward (bottom-up) traceability.
+Software Requirements Analysis is the responsibility of Software Design on an engine program. Table 2 describes
+the input data required for Software Requirement Analysis process, the activities to be performed during this
+process by Software Design and the output data produced by it.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 14
+Table 2: Software Requirements Process Activities
+Input Documents
+(Entry Criteria)
+• CSRD (baseline) and CSCRs
+Software Requirements
+Process Activities
+Output Documents in SCM
+(Exit Criteria)
+Software Requirements baseline establishment: • Approved ASCRs
+• AS SRD (baseline)
+SW Req.
+Change
+• IRS (baseline)
+• DRs impacting software high-level requirements
+• Standards for Software Requirements
+• Lessons learned from P&WC repository
+1.
+2.
+Perform AS-CL Requirements analysis and
+generate ASCRs (WIM 493 and MED 293 or
+MED 267 (NGPF Programs))
+Perform Peer and System Reviews on
+ASCR’s (MED 299)
+• ASCR Peer review checklists
+• DR raised (if needed)
+• Required IRS updates
+3.
+Update IRS as required
+AS SRD preparation and review:
+SRD
+Release
+• AS SRD (baseline)
+• Approved ASCRs
+1.
+2.
+Prepare AS SRD (WIM 493)
+Perform review on the AS SRD with respect to
+WIM 493.
+• Derived HLR and justification
+with agreement with Control
+System Engineering for SSA
+• SRDR checklist
+• Approved AS SRD
+• DR raised (if needed)
+Changes to AS-CL high-level requirements are verified through peer reviews performed by Software Design,
+applicable specialist group and Control System Engineering on all the ASCRs associated with a SBR. These
+reviews are carried out in accordance with the RTCA/DO-178B/C based checklists provided in MED 299 and
+ensure that the software high level requirements (SRD/ASCR) are consistent and developed correctly and
+completely in compliance with control system requirements (CSRD/CSCR). An ASCR is considered approved once
+both the corresponding checklists are passed by a peer reviewers, Lead Software Designer, Control System Lead,
+and reviewed by Control Software manager or delegate. The justifications to the software high-level derived
+requirements are assessed by Control Systems Engineering to ensure no derived high level requirement have
+safety impact as per the program specific SDP for System Safety Assessment (SSA) on derived requirements. For
+engine programs that must show compliance to the applicable Airworthiness Security requirements, all derived
+requirements shall also be assessed for impact to the system security risk assessment and security requirements
+by the Product Security Team.
+The ASCRs and their associated review checklists (MED 299) will be configured (i.e. stored) in the SCM as per the
+program specific SDP and SCMP and are part of the transition criteria for this phase. HLR completeness checks
+including traceability checks are performed under the Package Delivery checklists (i.e. MED 317 for SCADE, MED
+353 for Simulink). Upon the completion of all the ASCR reviews the updated AS SRD can be generated as per
+WIM 493, reviewed as per SRDR checklist (WIM 493  Appendix A) and submitted to CM as per EOP 107 and
+SCMP. Approval of the work products (output documents) produced by this process will establish the Software
+Requirements baseline.
+A discrepancy reporting, tracking and corrective action system will be established to control changes to all
+approved Software Requirements baseline as described in Section 7.1.3.2.1.
+For Software Requirements involving the use of a Core Library, the usage considerations are defined in MED 248
+and in the specific Core Library User Guide. The Core Library User Guide will include Software Requirement
+Templates and Samples, and Software Requirement Test Cases for component integration. The Core Library
+Software Checklist found in the specific Core Library User Guide should be referenced throughout the process, but
+is only required to be passed or conditionally passed prior to the completion of the Software Design phase since
+the questions involve aspects related to the entire development phase.
+7.1.2.3 
+Software Design
+Figure 7 illustrates typical software components interfacing in design architecture from the software high-level
+requirements in the form of CSCI flowing down to CSCs and to the lowest level CSUs.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 15
+Figure 7. Typical Software Components Interface in Design Architecture
+During this activity, the AS-CL architectural, interface with other CSCI's (i.e. ASI) and detailed design activities will
+be performed in accordance with the P&WC software detailed design process which is shown in Figure 8.
+The software verification activities shall be performed in accordance with the SVP to meet RTCA/DO-178B/C
+objectives as defined in the PSAC (Refer to 7.1.3.1).
+Figure 8. Detailed Design Activity
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 16
+The first objective of the software detailed design process are to establish the software design architecture
+including the allocation of the software (CSCI) into the CSCs with well defined internal and external interfaces and
+sequence of execution among the CSCs.
+The second objective of the software detailed design process are to develop the software design (low-level
+requirements) at CSU level in compliance with and traceable to the software high-level requirements (SRD), and to
+provide complete, consistent, correct, and verifiable software detailed design (low-level requirements) from which
+the software code may be generated. Design tools such as SCADE suite or MATLAB Simulink (refer to PSAC for
+software design tools) is used to design control law algorithms specified in the AS SRD in the form of graphical
+software low-level requirements. Periodic design reviews are held, as necessary, during this phase with the various
+functional groups involved in the design process. The need for such reviews depends on the magnitude and
+complexity of the design task. Refer to EOP 103 section B10 items 1 through 3 for details regarding these design
+reviews and WIM 750 for the design review process.
+The Application Software CSCI detailed design shall be developed in accordance with the software design
+standards as given in Section 7.1.1.3, documented in compliance with Section 11.10 of RTCA/DO-178B/C
+document (refer to Appendix A), and verified in accordance with the RTCA/DO-178B/C based review checklists for
+software design. The discrepancy reports (DR) shall be raised in the appropriate DR tracking system as defined in
+Section 7.1.3.2.1 to capture un-resolved non-conformities/problems during this activity. The traceability matrix shall
+be generated by Software Design to show the bi-directional traceability between SDD and SRD. Bi-directional
+traceability includes forward (top-down) traceability and backward (bottom-up) traceability. Table 3 describes the
+input data required for Software Design process, the activities to be performed during this process and the output
+data produced by it.
+Table 3: Detailed Design Process Activities
+Input Documents
+(Entry Criteria)
+• AS SRD (baseline)
+• Approved ASCRs
+• AS SDD (baseline)
+SW
+Design
+Change
+• IRS (baseline) and required updates
+• DRs impacting software low-level
+requirements
+• Standards for Software Design
+• Lessons learned from P&WC repository
+Software Detailed Design
+Process Activities
+Design Baseline establishment :
+1.
+2.
+3.
+4.
+Perform detailed design analysis and document
+detailed design changes
+Perform Peer Reviews on design changes (MED
+314 for SCADE programs or MED 266 for Simulink
+Programs)
+Hold design reviews if necessary
+Perform software delivery review (MED 317 for
+SCADE programs or MED 353 for Simulink
+programs)
+Output Documents in SCM
+(Exit Criteria)
+• Approved AS-CL detailed design
+changes
+• DCR checklists
+• Design review minutes
+• DR raised (if needed)
+• Package delivery checklist (MED
+317 for SCADE programs or MED
+353 for Simulink programs)
+• Derived LLR and justification with
+agreement with Control System
+Engineering for SSA
+• Approved AS-CL design changes
+SDD
+Release
+• Approved updated IRS
+• DCR checklists
+AS SDD preparation and review:
+1.
+2.
+Prepare AS SDD
+Perform review on the AS SDD with respect to
+MED 330 SDDR checklist.
+• SDDR checklist
+• Approved AS SDD
+• DR raised (if needed)
+Changes to software low-level requirements are verified through peer reviews performed by Software Design on
+each design change associated with a SBR. These reviews are carried out in accordance with the RTCA/
+DO-178B/C based Design Change Review (DCR) checklists given in MED 314 for SCADE programs or MED 266
+for Simulink programs and ensure that Software Design developed the software low-level requirements and
+architecture in the AS SDD correctly and completely comply with Application Software high-level requirements
+(SRD) and IRS. A software design change is considered approved once its corresponding checklist is passed. Note
+that items in the DCR checklist depend on the COTS design tool used for AS-CL design as defined in the PSAC.
+LLR completeness checks including traceability checks are performed under the SCADE/Simulink Delivery
+checklists (MED 317 and MED 353).
+The justifications to the software low-level derived requirements shall be provided to the Control Systems
+Engineering as per the program specific SDP for SSA on derived requirements.
+MED 317 (SCADE programs) and MED 353 (Simulink programs) are used to verify that the software is ready for
+delivery and requires SQA involvement and review.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 17
+All the design review meeting minutes and the DCRs will be configured (i.e., stored) in the SCM as per the program
+specific SDP and SCMP and constitute the transition criteria for this phase. Upon the completion of all software
+design change reviews the updated AS SDD is then generated as per MED 330, reviewed with respect to MED 330
+SDDR checklist and submitted to CM as per EOP 107 and SCMP. Approval of the work products (output
+Documents) produced by this process will establish the Software Design baseline.
+Note that both Software Requirement and Software Design baseline must be established, i.e. AS SRD and AS
+SDD must be released, before any formal verification activities begin and the software is released to the customer.
+A discrepancy reporting, tracking and corrective action system will be established to control changes to all
+approved Software Design baseline as described in Section 7.1.3.2.1.
+For Software Design involving the use of a Core Library, the usage considerations are defined in MED 248 and in
+the specific Core Library User Guide. The Core Library User Guide will include Software Design Templates and
+Samples. The Core Library Systems Checklist and Core Library Software Checklist found in the specific Core
+Library User Guide are to be passed or conditionally passed prior to the completion of the Software Design phase.
+7.1.2.4 
+Software Code and Integration (Implementation)
+The software coding and integration activity for AS CSCI will be performed as per the SDP to meet RTCA/
+DO-178B/C objectives and are only describe here for completeness. Refer to the PSAC for software coding and
+integration process activities detailed responsibilities. The software verification activities shall be performed in
+accordance with the SVP to meet RTCA/DO-178B/C objectives as defined in the PSAC (Refer to Section 7.1.3.1).
+Figure 9 illustrates a typical software implementation activity process.
+Figure 9. Typical Software Code/Implementation Phase
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 18
+Software code is generated in two coding steps as follows:
+1.
+2.
+Automatic code process by using a Qualifiable Code Generator such as KCG to translate the graphically
+designed modules (CSU) into “C” source code files. Typically this process is applicable to AS-CL.
+Manual code process by using C code editor (e.g. Text pad Editor) to develop the “C” source code from the
+software design as given in software design description document.
+Automatically Generated and manually developed source files (*.c, *.h) are then integrated, compiled and linked
+together to produce the Application Software (AS) executable image. Compiler switches and Qualifiable Code
+Generator tool options shall be used in compliance with the Tool Qualification Plan(s) for Qualifiable Code
+Generator and software development kits, and software coding standards. Traceability from software low-level
+requirements to Code for a SCADE environment shall be documented per MED 256 or refer to ER9432 SDP
+Software Coding Process section for Simulink programs.
+NOTE: References to SCADE and KCG in this section are made for completeness only. Refer to PSAC for COTS
+design tool and Qualifiable Code Generator used.
+7.1.3 
+7.1.3.1 
+Integral Processes
+This section describes the software integral processes which comprise of Software verification process activities,
+Software configuration management process activities and Software quality assurance process activities.
+Software Verification Process Activities
+The software verification activities for Application Software CSCI is performed as per SVP to meet RTCA/
+DO-178B/C level-A software objectives and are described here for completeness only. Refer to the PSAC for
+software verification process activities detailed responsibilities. The following are the typical software verification
+activities:
+• Unit Testing
+• Integration Testing includes– Software Integration (SI) Testing– Hardware/Software Integration (HSI) Testing
+• Reviews and analysis
+Unit Testing (UT): The purpose of unit testing is to verify the implementation of computer software units (CSU)
+satisfy their low-level requirements. This testing is also called Module testing. Code reviews, preparation of unit test
+cases, test procedures and test data peer review are the activities performed in Unit testing.
+Software Integration (SI) Testing: Integration test ensures that the code for CSUs that constitute computer software
+components (CSC) interact correctly with each other and satisfy the software high-level requirements and software
+architecture. Preparation of software integration test cases, test procedures and test data peer review are the
+activities performed in integration testing.
+Hardware/Software Integration (HSI) Testing: The purpose of HSI testing is to verify correct operation of the AS
+CSCI with the other relevant CSCI(s) in the target computer environment (HWCI) and correct operation of
+hardware/software interfaces to satisfy the software high-level requirements.
+For Software changes involving the use of a Core Library, the credit that can be taken for the use of the library is
+specified in MED 248 and in the specific Core Library User Guide. Refer to the Core Library System and Software
+Checklists found in the specific Core Library User Guide which will detail if re-execution of verification tests must be
+performed or if any core verification credit can be sought.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+Software Configuration Management Process Activities
+PAGE 19
+7.1.3.2 
+Software Configuration Management (SCM) activities for Application Software CSCI shall be performed in
+accordance with the SCMP. Thus, P&WC Software Design uses configuration management tool (e.g., SVN,
+mantis, documentum, etc) which provides an electronic software configuration management environment. The tool
+facilitates a configuration management process on the software products (i.e. Software life cycle data as mentioned
+in Appendix A). The discrepancy reports (DR) shall be raised in the appropriate DR tracking system as defined in
+Section 7.1.3.2.1 over the life of the Engine’s program to capture the software aspects of certification
+non-conformities.
+The SCM process includes the activities of configuration identification, change control and review, Problem
+Reporting-Tracking and Corrective Action, baseline establishment and traceability, and archiving/retrieving of the
+software work products, including the software life cycle data release. Refer to SCMP for detailed information and
+PSAC for roles and responsibilities.
+7.1.3.2.1 Problem Reporting / Tracking / Corrective Action System
+The P&WC Software Design shall use the problem reporting / tracking process/corrective action system and tools
+as defined in the SCMP for handling each non-conformity (problem report) detected in software work products
+during the development life cycle activities required by the PSAC.
+Non-conformities shall be classified by defect category, using the categories in WIM 811.
+P&WC guidelines for standards and best practices on reporting software issues and software change reports for
+corrective actions are documented in MED 259.
+In addition, P&WC has a problem reporting and tracking system for the engine programs as defined in EOP 158.
+All power-plant system problems pertaining to system testing are recorded in this system. Those problems
+attributed to the airborne software are transferred or raised directly in the problem reporting system as appropriate
+in accordance with the program specific SCMP.
+7.1.3.3 
+7.1.4 
+7.2 
+Software Quality Assurance Activities
+Software quality assurance activities on AS CSCI development will be performed in accordance with the P&WC
+Software Quality Assurance Plan (QP 21-SQAP). The Application Software development includes software
+high-level requirements analysis (SRD), software low-level requirements pertaining to the AS-CL only. The
+objectives of the SQA process are to obtain assurance that:
+a.
+b.
+c.
+Software development processes and integral processes comply with approved software plans and standards.
+The transition criteria for the software life cycle processes are satisfied.
+A conformity review of the software product is conducted.
+Refer to QP 21 - SQAP for detailed information. The discrepancy reports (DR) will be raised in the appropriate DR
+tracking system as defined in Section 7.1.3.2.1 to capture un-resolved non-conformities/problems during this
+activity.
+System Verification and Validation Activities
+System Verification and Validation Activities are performed by the Control Systems Engineering. Refer to the
+EOP 84 for Control System Development process documentation on Control Systems verification and validation
+activities.
+Product Security
+For engine programs that must show compliance to the applicable Airworthiness Security requirements, additional
+activities may be required.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 20
+In such cases, the product security functionality to be implemented in the embedded software will be defined at the
+system-level (CSRD) and at the software-level (SRD and SDD), as applicable. The Product Security team and the
+PS DAA (or the cognizant Software CVE with product security knowledge) will coordinate these activities with the
+Software Design team. In general, product security change incorporation will use the same change control and
+requirements management system as that defined in the program specific CM plan (SCMP) or development plan
+(SDP). However, additional change control requirements may be required and defined in the program specific
+Security CMP by the Product Security team to ensure configuration control and access restriction of
+security-related data.
+The Software DAA and PS DAA will collaborate and liaise with the certification authorities as needed. Similarly, the
+cognizant Software CVE with product security knowledge will liaise with the certification authorities as needed.
+8. 
+Project Organization
+Figure 10 shows the typical project organization for an engine program (software aspects).
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 21
+Figure 10. Project Organization
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+8.1 Roles and Responsibilities
+Table 4 provides an overview on the roles and responsibilities of the members involved in the control systems
+software development activities. Refer to PSAC for details on the roles and responsibilities of each team within
+P&WC or any supplier.
+Table 4: Roles and Responsibilities
+Key Players Roles and Responsibilities
+Project Engineering Team The team is responsible for managing the Engine project schedules at P&WC. The Engine project engineer is
+responsible for the program and is the IPT leader. The project engineer will secure adequate resources from the
+P&WC functional groups to ensure that the requirements, design, and verification of the Engine control system are
+completed per program schedules.
+In a typical project, the Project Manager is the Engine DAA, and is responsible to ensure that engine complies
+with the pertinent airworthiness standards (DO-178B/C), the objectives are respected through the review and
+approval of the plans and standards, by auditing the various software activities (internal and at the suppliers)
+against the approved plans and processes in place and perform data sampling to assess the quality and maturity
+of the engine.
+Control Systems Engineering Team This team is responsible for the Engine control system requirements analysis, design, allocating control system
+requirements to hardware and software functions, and validating control system requirements. Also interfacing
+with Product Reliability and Safety team to assess the system safety impact on derived requirements originated
+from Software development life cycle processes. Controls Manager leads the Control Systems Engineering team
+and is responsible for software aspects of certification as defined in the PSAC.
+Product Security Team This team works under the direction of the PS DAA (or the cognizant Software CVE with product security
+knowledge) and has the same mandate as the PS DAA (or the cognizant Software CVE with product security
+knowledge). Refer to section 7.2.
+Software Design Team This team is responsible for developing the Application Software CSCI for the Engine project including software
+requirements analysis, design and code integration activities. The Software Chief has responsibility for engine
+control system Application Software only. Usually overall accountability for Engine EEC/FADEC software resides
+with the Manager of Controls Systems Engineering. P&WC Software Design team is composed of engineers who
+develop Control Systems Software. Software Manager/Chief leads the Software Design team. The Application
+Software CSCI verification is performed as per the roles and responsibilities defined in the PSAC.
+Additionally, the team is responsible for properly overseeing the software development activities performed at the
+supplier, Refer to section 8.1.1.
+Software DAA or CVE The software DAA or CVE assigned to the Engine project is responsible to ensure that DO-178B/C objectives and
+Issue Paper or CRI’s are respected through the review and approval of the software plans and standards, by
+auditing the various software activities (internal and at the suppliers) against the approved software plans and
+processes in place and perform software lifecycle data sampling to assess the quality and maturity of the
+software.
+In a typical project, the Software DAA or CVE is the Control Manager.
+PS DAA (or cognizant Software CVE with
+product security knowledge)
+Product Security (PS) DAA (or cognizant Software CVE with product security knowledge) assigned to the Engine
+project is responsible to ensure that the Airworthiness Security requirements and related Special Condition
+Airworthiness (SCA) and/or CRI’s are satisfied.
+Software Quality Assurance Team This team is responsible for the SQA process activities as described in the P&WC QP21 - SQAP For Airborne
+Software (Class 1a). Software Quality is independent of engineering reporting to the Quality organization.
+Software Configuration Management Team This team is responsible for the SCM process activities as described in Supplier’s SCMP as this activity is
+maintained by Supplier’s Software Configuration Management processes. The Application Software CSCI
+configuration management activities are performed as per the roles and responsibilities defined in the PSAC.
+Supplier's Software Design Team(s) This team is responsible for all the activities pertaining to the control systems software development as defined in
+the PSAC. The Control Systems Engineering Manager will manage the technical aspects of supplier activities.
+Supplier coordination is mainly performed by Projects Engineering as the Project Engineer is IPT leader.
+Supplier's Software Verification Team(s) This team is responsible for all the activities pertaining to the control systems software verification as defined in
+the PSAC. The Control Systems Engineering Manager will manage the technical aspects of supplier activities
+Supplier coordination is mainly performed by Projects Engineering as the Project Engineer is IPT leader.
+Product Reliability and Safety Engineering This team is responsible for assessing the system safety impact, after the interfacing from Control System, on
+derived requirements originated from Software development life cycle processes. Control System analyses first for
+whether a derived touches safety.
+Also, the team ensure software abnormalities, such as single event upset for example, causes no concern on
+reliability and safety.
+8.1.1 P&WC oversight of Supplier's Software Design Team(s) Activities
+The P&WC Software Design Team is responsible for the outputs of the software Development activities performed
+at the supplier. The P&WC Software Design Team shall ensure that the supplier(s) respect the processes, plans
+and standards in place, apply the P&WC design best practices and lessons learned and ensure the adequate level
+of effectiveness of the supplier’s design team.
+The level of oversight performed by the P&WC Software Design Team may vary from one supplier to the other
+based on P&WC previous experience with that specific supplier or its measured effectiveness.
+EOP- 183 PAGE 22
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+EOP- 183
+PAGE 23
+Examples:
+• Complete review of all design activities for new or low effectiveness software design suppliers
+• Periodic sampling for established P&WC’s software design suppliers or proven effective software design
+suppliers
+The effectiveness of the supplier’s software design team shall consider the supplier’s ability to apply the processes,
+plans and standards in place, its ability to understand the program specific engine control system and its integration
+to the engine or airframe and the overall quality of its software development outputs. The supplier’s effectiveness
+shall be measured by the number of software non-conformance issues originating from activities performed by the
+supplier’s design team.
+During the course of the software development of a program, the level of oversight may vary if the measured
+effectiveness evolves (either way may drive more or less oversight).
+9. 
+10. 
+Process Tailoring for Transition Criteria Reviews
+Tailoring of the definition of transition criteria and the corresponding review process shall be permitted by the
+Manager Software Design team in accordance with the nature and purpose of the software being developed for an
+engine program. Tailoring of this process consists of the following:
+• Identifying transition criteria review requirements that are not applicable.
+• Adding transition criteria review requirements.
+• Providing quantifiable criteria for the transition criteria review requirements (how often, how many, transition
+criteria, etc.).
+Approved (by DAA/Certification authority) process tailoring has to be documented either in program specific PSAC
+or P&WC internal process document and will be communicated to the affected engineering groups.
+Notes
+The | symbol is used to indicate technical and major editorial changes from the previous issue of this procedure.
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
+APPENDIX A 
+Software Life Cycle Data Compliance to RTCA/DO-178B/C Objectives
+The P&WC and Supplier Software Design shall prepare and maintain records of each software development
+activity in accordance with RTCA/DO-178B/C objectives as given in the following table. Refer to PSAC for detailed
+roles and responsibilities on these activities.
+RTCA/
+DO-178B/C
+Section
+(inputs)
+Life Cycle Data/Document Name Control
+Category
+(CC)
+Objectives
+RTCA/DO-178B/C
+Objectives
+(Outputs)
+Life Cycle Process
+Outputs
+SOI #
+11.1 Plan for Software Aspects of
+Certification (PSAC) CC1 Table A-1, #
+1-4 Table A-10, # 1-2
+Software Planning Process Documents
+NOTE: SOI-1 Verification data is listed
+in Section 11.14
+SOI-1
+11.2 Software Development Plan (SDP) CC1 Table A-1, #1-4
+11.3 Software Verification Plan (SVP) CC1 Table A-1, #1-4
+11.4 Software Configuration Management
+Plan (SCMP)
+CC1 Table A-1, #1-4
+11.5 Software Quality Assurance Plan
+(SQAP)
+CC1 Table A-1, # 1-4
+11.6 Software Requirements Standards CC1 Table A-1, # 5
+Software Standards (Part of Software
+Planning Process) 11.7 Software Design Standards CC1 Table A-1, # 5
+11.8 Software Code Standards CC1 Table A-1, # 5
+11.9 Software Requirements Data (SRD) CC1 Table A-2, # 1-2
+Software Design Process Output Data
+NOTE: SOI-2 Verification data is listed
+in Section 11.14
+SOI-2
+11.10 Design Description (SDD) CC1 Table A-2, # 3-5
+11.11 Source Code CC1 Table A-2, # 6
+11.12 Executable Object Code CC1 Table A-2, # 7
+11.13 Software Verification Cases and
+Procedures (SVCP)
+CC1 Table A-6, # 1-5
+Table A-7, # 1
+Software Verification Process Output Data SOI-3
+11.14 Software Verification Results (SVR) CC2 
+SOI-1 verification:
+Table A-1, # 6-7
+SOI-2 verification:
+Table A-3, # 1-7
+Table A-4, # 1-13
+Table A-5, # 1-7
+SOI-3 verification:
+Table A-6, # 1-5
+Table A-7, # 1-8
+11.15 Software Life Cycle Environment
+Configuration Index
+CC1 Table A-8, # 6
+Software Configuration
+Management Process Output Data
+SOI-2
+SOI-3
+SOI-4
+11.16 Software Configuration Index (SCI) CC1 Table A-8, # 2
+Table A-10, # 3
+11.17 Problem Reports CC2 Table A-8, # 3
+11.18 Software Configuration Management
+Records
+CC2 Table A-8, # 1-6
+11.19 Software Quality Assurance Records
+(including Software Conformity Review)
+CC2 Table A-1, # 6-7 Software Quality Assurance Process Output
+Data
+SOI-4 Table A-9, # 1-3
+11.20 Software Accomplishment Summary
+(SAS)
+CC1 Table A-10, # 3 Compliance Substantiation Data
+11.21 Trace Data (DO 178C only) CC1
+CC2
+CC2
+CC2
+CC1
+Table A-2, # 1,4,6
+Table A-3, # 6
+Table A-4, # 6
+Table A-5, # 5
+Table A-6, # 1,-4
+Software Development Process Output Data
+SOI-2
+SOI-3
+11.22 Parameter Data Item File (DO 178C
+only)
+CC1
+CC2
+Table A-2, # 7
+Table A-5, # 8,9
+Software Development Process Output Data SOI-2
+SOI-3
+NOTE:Software development activities also include RTCA/DO-178B/C Section 12.0 ”Additional Considerations”
+concerning the use of previously developed software, qualification of software tools, and alternative
+methods for achieving the RTCA/DO-178B/C objectives as applicable.
+EOP- 183 PAGE 24
+THIS PROCEDURE FORMS PART OF (1) THE DESIGN APPROVAL PROCEDURES MANUAL (DAPM) AND IS SUBJECT TO APPROVAL BY TRANSPORT CANADA CIVIL AVIATION (TCCA) AND (2) ALSO FORMS PART
+OF THE P&WR DESIGN ORGANIZATION HANDBOOK (DOH), AND IS SUBJECT TO ACCEPTANCE ACCORDING TO DOH CHANGE PROCEDURE.
+THE INFORMATION CONTAINED ON THIS PAGE IS SUBJECT TO THE NOTICE SET FORTH ON THE TITLE PAGE.
+THIS DOCUMENT DOES NOT CONTAIN TECHNICAL DATA
+Export Classification Date:2016-02-05
